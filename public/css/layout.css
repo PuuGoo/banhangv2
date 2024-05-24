@@ -1,0 +1,28 @@
+.site-header {
+  margin: 22px 0;
+}
+.sh-fs-icon_search {
+  right: 10px;
+  top: 10px;
+
+  width: fit-content;
+  padding: 0;
+}
+.form-control {
+  width: 856px;
+}
+.sh-logo {
+  margin-right: 68px;
+}
+.shi-cart,
+.shi-user {
+  width: 48px;
+  height: 48px;
+
+  border-radius: 50%;
+  border: 1px solid var(--dGrey-01);
+}
+/* Navigation */
+/* .site-nav li a {
+  padding-left: 0 !important;
+} */

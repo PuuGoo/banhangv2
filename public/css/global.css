@@ -1,0 +1,396 @@
+/***** CSS Generall ******/
+
+/* Font google */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+/* font-family: "Playfair Display", serif; */
+/* font-family: "Poppins", sans-serif; */
+
+/* Color */
+:root {
+  --grey-01: #818b9c;
+  --grey-02: #919eab;
+  --grey-03: #c4c8cc;
+  --white: #ffffff;
+  --black-01: #0b0f0e;
+  --black-02: #1d2322;
+  --black-03: #313736;
+  --darkGreen-01: #1e4c2f;
+  --darkGreen-02: #257e34;
+  --darkGreen-03: #1d9e34;
+  --orange-01: #ffa439;
+  --orange-02: #ffd5b8;
+  --orange-03: #fcece1;
+  --lGrey-01: #f1f1f1;
+  --lGrey-02: #f6f6f6;
+  --lGrey-03: #f9f9f9;
+  --dGrey-01: #e4e9ee;
+  --dGrey-02: #f6f8fa;
+  --dGrey-03: #f7f7f7;
+  --red-01: #e04124;
+  --red-02: #ef907f;
+  --red-03: #f9bcb1;
+}
+/* Typography */
+/* Extra Heading */
+.display-1 {
+  font-size: 58px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.display-2 {
+  font-size: 38px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.display-3 {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.display-4 {
+  font-size: 28px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.display-5 {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.display-6 {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+/* Heading */
+.h1 {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 120%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.h2 {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.h3 {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.h4 {
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.h5 {
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+.h6 {
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+/* Paragraph */
+.p1-regular-18 {
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p1-medium-18 {
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p1-regular-16 {
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p1-medium-16 {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p2-regular-14 {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p2-medium-14 {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p3-regular-12 {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p3-medium-12 {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p4-regular-10 {
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.p4-medium-10 {
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 160%;
+  color: var(--black-01);
+}
+/* Another CSS */
+body {
+  font-family: "Poppins", sans-serif;
+  text-rendering: optimizeLegibility;
+  background-color: var(--white);
+  z-index: 1000;
+}
+html {
+  height: 100%;
+}
+body,
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+img {
+  max-width: 100%;
+}
+a {
+  text-decoration: none;
+  outline: none;
+  background: transparent;
+
+  color: var(--black-01);
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  padding: 0;
+  margin: 0;
+}
+/* Margin: The between this box and that box */
+.mt-80 {
+  margin-top: 80px;
+}
+.mt-64 {
+  margin-top: 64px;
+}
+.mt-40 {
+  margin-top: 40px;
+}
+.mb-80 {
+  margin-bottom: 80px;
+}
+.mb-64 {
+  margin-bottom: 64px;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+/* Margin: Another */
+.mt-4 {
+  margin-top: 4px;
+}
+.mt-8 {
+  margin-top: 8px;
+}
+.mt-16 {
+  margin-top: 16px;
+}
+.mt-32 {
+  margin-top: 32px;
+}
+.mb-4 {
+  margin-bottom: 4px;
+}
+.mb-8 {
+  margin-bottom: 8px;
+}
+.mb-16 {
+  margin-bottom: 16px;
+}
+.mb-32 {
+  margin-bottom: 32px;
+}
+.me-40 {
+  margin-right: 40px;
+}
+.ms-40 {
+  margin-left: 40px;
+}
+/* Margin: The spacing between buttons */
+.me-16 {
+  margin-right: 16px;
+}
+/* Margin: The spacing between icon and text */
+.me-8 {
+  margin-right: 8px;
+}
+.ms-8 {
+  margin-left: 8px;
+}
+/* Margin: The spacing between products */
+.me-24 {
+  margin-right: 24px;
+}
+.ms-24 {
+  margin-left: 24px;
+}
+.mt-24 {
+  margin-top: 24px;
+}
+.mb-24 {
+  margin-bottom: 24px;
+}
+
+/* Button 38-48-52 */
+.btn {
+  max-height: 48px;
+  width: 150px;
+  padding: 14px 10px;
+
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+
+  /* border: none; */
+}
+/* Button Colors */
+.btn-primary {
+  background-color: var(--darkGreen-02);
+  color: var(--white);
+}
+.btn-secondary {
+  background-color: var(--grey-01);
+  color: var(--white);
+}
+.btn-outline-primary {
+  color: var(--darkGreen-02);
+  border-color: var(--darkGreen-02);
+}
+.btn-outline-secondary {
+  color: var(--grey-01);
+  border-color: var(--grey-01);
+}
+/* Button Sizes */
+.btn-lg {
+  max-height: 52px;
+  width: 200px;
+  padding: 14px 10px;
+
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+
+  /* border: none; */
+}
+.btn-sm {
+  max-height: 38px;
+  width: 100px;
+  padding: 6px 16px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+
+  /* border: none; */
+}
+/* Form control 38-48-52 */
+.form-control {
+  max-height: 48px;
+  width: 400px;
+  padding: 14px 10px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 160%;
+  color: var(--black-01);
+}
+/* Form Sizes */
+.form-control-lg {
+  max-height: 48px;
+  width: 500px;
+  padding: 14px 10px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 160%;
+  color: var(--black-01);
+}
+.form-control-sm {
+  max-height: 38px;
+  width: 300px;
+  padding: 14px 10px;
+
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 140%;
+  letter-spacing: -0.2px;
+  color: var(--black-01);
+}
+/* Nav */
+.bg-body-primary {
+  background-color: var(--darkGreen-02);
+  color: var(--white);
+}
+
+@media screen and (min-width: 1440.00002px) {
+  .container {
+    margin: 0 auto;
+    padding: 0;
+    width: 1200px !important;
+  }
+}

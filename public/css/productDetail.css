@@ -1,0 +1,14 @@
+.spd-img {
+  width: 585px;
+  height: 460px;
+  padding: 80px 143px;
+
+  border-radius: 8px;
+  background-color: var(--lGrey-02);
+}
+.spd-img > img {
+  mix-blend-mode: multiply;
+}
+.spd-c-buttons > a > button {
+  width: 260px;
+}

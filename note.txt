@@ -1,0 +1,5 @@
+1. Case: Show/hide form address and update session or database
+If session['id_user'] not found and session['address'] not found, it will show form input address
+If seesion['id_user] not found and seesion['address'] found, it will show form input address
+If session['id_user'] found and session['address] found, it won't show form input address
+If seesion['id_user'] found and session['address'] not found, it will show form input address

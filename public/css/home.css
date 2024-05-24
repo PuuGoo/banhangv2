@@ -1,0 +1,17 @@
+.shfp-item {
+  max-width: 282px;
+}
+.shfp-item > .shtp-item-image {
+  padding: 50px 51px;
+  border-radius: 8px;
+  background-color: var(--lGrey-02);
+}
+.shfp-item > .shtp-item-image > img {
+  mix-blend-mode: multiply;
+}
+.shtp-buttons button {
+  width: fit-content;
+}
+.shtp-buttons svg path {
+  stroke: var(--white);
+}
