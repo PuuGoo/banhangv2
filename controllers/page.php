@@ -61,10 +61,31 @@ class Page
         }
     }
 
-    public function login()
+    public function submit()
+    {
+        include "views/submit.php";
+    }
+
+
+    public function checkout()
     {
 
-        echo "This Is Login Page";
+        $pageTitle = "Checkout";
+        $view = "checkout.php";
+        include "views/layout.php";
+    }
+
+    public function checkout_()
+    {
+        $fullname = trim(strip_tags($_POST['fullname']));
+        $email = trim(strip_tags($_POST['email']));
+        $address = trim(strip_tags($_POST['address']));
+        $mobileNumber = trim(strip_tags($_POST['mobileNumber']));
+        $id_order = Order::create_order($fullname, $email, $address, $mobileNumber);
+        Order::create_order_detail($id_order);
+        $pageTitle = "Save Successfully";
+        $view = "mesOrder.php";
+        include "views/layout.php";
     }
 }
 $page = new Page;

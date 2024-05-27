@@ -28,7 +28,8 @@ class Product extends Database
     public static function find_product_by_id($id_sp = 0)
     {
         $sql = "SELECT * FROM sanpham WHERE id_sp = $id_sp ";
-        return self::find_this_query($sql);
+        $the_result_array = self::find_this_query($sql);
+        return !empty($the_result_array) ? array_shift($the_result_array) : false;
     }
 
     public static function find_product_by_idCatelogy($id_loai = 0, $pageNum = 1, $pageSize = 12)

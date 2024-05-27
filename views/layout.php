@@ -25,6 +25,8 @@
         <?php include "views/footer.php" ?>
     </footer>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="<?= PUBLIC_URL . "/js/" . explode(".", $view)[0] ?>.js?v=<?= time() ?>"></script>
 </body>
 
 </html>

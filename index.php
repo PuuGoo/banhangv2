@@ -3,11 +3,14 @@ ob_start();
 require_once "models/config.php";
 include_once "models/functions.php";
 include_once "controllers/page.php";
+include_once "controllers/userController.php";
 
 
 $database = new Database;
 $product = new Product;
 $catelogy = new Catelogy;
+$order = new Order;
+$user = new User;
 
 
 $baseDir = "/banhangv2/";
@@ -18,10 +21,19 @@ $router = [
         'productdetail' => [$page, 'product_detail'],
         'catelogy' => [$page, 'catelogy'],
         'addtocart' => [$page, 'addtocart'],
-        'showcart' => [$page, 'showcart']
+        'showcart' => [$page, 'showcart'],
+        'checkout' => [$page, 'checkout'],
+        'signin' => [$userController, 'signin'],
+        'signup' => [$userController, 'signup'],
+        'changepass' => [$userController, 'changepass'],
     ],
     'post' => [
-        'login' => [$page, 'login']
+        'checkout_' => [$page, 'checkout_'],
+        'signup_' => [$userController, 'signup_'],
+        'signin_' => [$userController, 'signin_'],
+        'changepass_' => [$userController, 'changepass_'],
+        'submit' => [$page, 'submit'],
+
     ]
 ];
 
@@ -48,3 +60,6 @@ $action = $router[$METHOD][$route];
 $session = new Session;
 
 call_user_func($action);
+
+
+// session_destroy();
