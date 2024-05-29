@@ -29,7 +29,6 @@ $(document).ready(function () {
     $.post("submit", { quantity: currentVal, id_sp: id_sp }, function (data) {
       //   $("#formCart")[0].reset();
     });
-    location.reload();
   }
 
   function decrementValue(e) {
@@ -58,26 +57,66 @@ $(document).ready(function () {
     $.post("submit", { quantity: currentVal, id_sp: id_sp }, function (data) {
       //   $("#formCart")[0].reset();
     });
-    location.reload();
   }
 
+  var checkboxValue = $("input[name=checkboxValue]").val();
+  var checkboxValue_array = checkboxValue.split("&");
+  var obj = new Object();
+
+  checkboxValue_array.forEach((e, index) => {
+    var new_e = e.split("=");
+    obj[new_e[0]] = new_e[1];
+  });
+  showHide();
   btnCheckbox.each(function (index, e) {
     e.addEventListener("click", function () {
       var id_sp = e.getAttribute("id");
+      // proSelected.each(function (index, e) {
+      //   if (e.getAttribute("id_selected") == id_sp) {
+      //     e.setAttribute("style", "display: block !important");
+      //   }
+      // });
       if (e.checked == true) {
-        $.post("submit", { id_sp: id_sp, state: true }, function (data) {});
-        location.reload();
+        obj[id_sp] = "true";
+        $.post("submit", { id_sp: id_sp, state: true });
       } else {
+        obj[id_sp] = "false";
         $.post("submit", { id_sp: id_sp, state: false });
-        location.reload();
       }
     });
   });
+  $(document).on("change", () => {
+    showHide();
+  });
+
+  function showHide() {
+    var count = 0;
+    for (let key in obj) {
+      if (obj[key] == "false") {
+        count++;
+      }
+    }
+    if (count == Object.entries(obj).length) {
+      $(".scp-p-checkboxEmpty")[0].style.display = "block";
+      $("button[name=btnCheckout]")[0].style.display = "none";
+      $(".scp-p-productEmpty")[0].style.display = "block";
+      $(".scp-p-items")[0].setAttribute("style", "display: none !important");
+      $(".scp-pt-price").text(0 + " VND");
+    } else {
+      $(".scp-p-checkboxEmpty")[0].style.display = "none";
+      $("button[name=btnCheckout]")[0].style.display = "block";
+      $(".scp-p-productEmpty")[0].style.display = "none";
+      $(".scp-p-items")[0].setAttribute("style", "display: flex !important");
+    }
+  }
+
   button_plus.on("click", function (e) {
     incrementValue(e);
+    // location.reload();
   });
 
   button_sub.on("click", function (e) {
     decrementValue(e);
+    // location.reload();
   });
 });

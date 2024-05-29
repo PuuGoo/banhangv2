@@ -59,46 +59,52 @@ $priceTotal = $quantityTotal = 0;
                             </div>
                         <?php endforeach; ?>
                     </div>
-                    <div class="sc-proSum scp border rounded-2 border-grey d-flex flex-column justify-content-center" style="width: 400px;padding: 24px;height:200px;">
+                    <div class="sc-proSum scp border rounded-2 border-grey d-flex flex-column justify-content-center" style="width: 450px;padding: 24px;height:200px;">
                         <div class="scp-proList mb-8">
-                            <?php
-
-                            $resultArray = array_count_values($_SESSION['checkbox']);
-
-
-                            ?>
-                            <?php if (isset($resultArray['false']) && $resultArray['false'] == count($_SESSION['checkbox'])) : ?>
-                                <div class="scp-p-empty">No products selected</div>
-                            <?php else : ?>
-                                <?php foreach ($_SESSION['checkbox'] as $id_sp => $state) : ?>
-                                    <?php
-
-                                    $prod = Product::find_product_by_id($id_sp);
-                                    $price = $prod->gia * $_SESSION['cart'][$id_sp];
-
-                                    ?>
-                                    <?php if ($state == "true") : ?>
-                                        <div class="scp-p-items d-flex justify-content-between align-items-center">
-                                            <div class="scp-pi-name text-break overflow-x-hidden" style="width: 200px;white-space: nowrap;"><?= $prod->ten_sp ?></div>
-                                            <div class="scp-pi-price" style="white-space: nowrap;"><?= number_format($price, 0, "", ".") . " VND" ?></div>
-                                        </div>
-                                    <?php endif; ?>
-                                <?php endforeach; ?>
-                            <?php endif; ?>
+                            <div class="scp-p-productEmpty">No products selected</div>
+                            <div class="scp-p-items d-flex justify-content-between align-items-center">
+                                <div class="scp-pi-name text-break overflow-x-hidden" style="width: 200px;white-space: nowrap;">Product Name</div>
+                                <div class="scp-pi-price" style="white-space: nowrap;">Product Price</div>
+                            </div>
                         </div>
                         <div class="scp-priceTotal d-flex justify-content-between align-items-center mb-8">
                             <div class="scp-pt-title h2">Total Price</div>
                             <div class="scp-pt-price"><?= number_format($priceTotal, 0, "", ".") . " VND" ?></div>
                         </div>
                         <div class="sc-button text-end">
-                            <a href="checkout">
-                                <button class="btn btn-primary">Checkout</button>
+                            <div class="scp-p-checkboxEmpty" style="color: red; font-weight: bold;">Please Select Least One Product To Checkout!</div>
+                            <a href="checkout" class="d-flex justify-content-end">
+                                <button type="button" name="btnCheckout" class="btn btn-primary">Checkout</button>
                             </a>
                         </div>
                     </div>
 
                 </div>
             </form>
+            <?php
+
+            if (isset($_SESSION['checkbox'])) {
+                $str = [];
+                foreach ($_SESSION['checkbox'] as $id_sp => $state) {
+                    $str_item = "{$id_sp}={$state}";
+                    array_push($str, $str_item);
+                };
+                $newStr = implode("&", $str);
+            }
+
+            if (isset($_SESSION['cart'])) {
+                $strCar = [];
+                foreach ($_SESSION['cart'] as $id_sp => $quantity) {
+                    $str_car = "{$id_sp}={$quantity}";
+                    array_push($strCar, $str_car);
+                }
+                $newStrCar = implode("&", $strCar);
+            }
+
+
+
+            ?>
+            <input type="hidden" name="checkboxValue" value="<?= $newStr ?>" value_session_cart="<?= $newStrCar ?>">
 
         </div>
     </div>

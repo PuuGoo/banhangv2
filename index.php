@@ -26,6 +26,7 @@ $router = [
         'signin' => [$userController, 'signin'],
         'signup' => [$userController, 'signup'],
         'changepass' => [$userController, 'changepass'],
+        'logout' => [$userController, 'logout'],
     ],
     'post' => [
         'checkout_' => [$page, 'checkout_'],

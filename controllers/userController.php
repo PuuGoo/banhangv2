@@ -36,7 +36,6 @@ class UserController
         $email = trim(strip_tags($_POST['email']));
         $password = trim(strip_tags($_POST['password']));
         $result = User::checkuser($email, $password);
-
         if (is_array($result) == true) { //thành công
             $_SESSION['id_user'] = $result['id_user'];
             $_SESSION['hoten'] = $result['hoten'];
@@ -84,6 +83,12 @@ class UserController
         $pageTitle = "Change Pass";
         $view = "mesChangePass.php";
         include "views/layout.php";
+    }
+
+    public static function logout()
+    {
+        session_destroy();
+        redirect("signin");
     }
 }
 
