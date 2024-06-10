@@ -77,15 +77,34 @@ class Page
 
     public function checkout_()
     {
-        $fullname = trim(strip_tags($_POST['fullname']));
-        $email = trim(strip_tags($_POST['email']));
-        $address = trim(strip_tags($_POST['address']));
-        $mobileNumber = trim(strip_tags($_POST['mobileNumber']));
-        $id_order = Order::create_order($fullname, $email, $address, $mobileNumber);
-        Order::create_order_detail($id_order);
-        $pageTitle = "Save Successfully";
-        $view = "mesOrder.php";
-        include "views/layout.php";
+        $validator = new Validator($_POST);
+        $errors = $validator->validateForm();
+
+        if (empty($errors)) {
+            $hoten = trim(strip_tags($_POST['hoten']));
+            $email = trim(strip_tags($_POST['email']));
+            $diachi = trim(strip_tags($_POST['diachi']));
+            $dienthoai = trim(strip_tags($_POST['dienthoai']));
+            $id_dh  = Order::create_order($hoten, $email, $diachi, $dienthoai);
+            Order::create_order_detail($id_dh);
+
+            unset($_SESSION['cart'], $_SESSION['checkbox']);
+
+            $pageTitle = "Save Successfully";
+            $view = "mesOrder.php";
+            include "views/layout.php";
+        } else {
+            $pageTitle = "Checkout";
+            $view = "checkout.php";
+            include "views/layout.php";
+        }
+    }
+
+    public function admin()
+    {
+        $pageTitle = "Dashboard";
+        $contentView = "views/admin/dashboard.php";
+        include "views/admin/layout.php";
     }
 }
 $page = new Page;

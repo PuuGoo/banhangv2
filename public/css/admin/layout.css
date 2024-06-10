@@ -1,0 +1,67 @@
+.bh-fixed-top .bh-header,
+.banhang-fixed-top .bh-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+}
+
+.bh-fixed-top .bh-fixed-top {
+  height: 64px;
+  z-index: 1039;
+}
+
+.banhang-fixed-top .bh-sidebar {
+  width: 225px;
+  height: 100vh;
+  z-index: 1029;
+}
+
+.bh-sidebar .bh-sidebar-items {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  padding: 64px 0 0 16px;
+}
+
+.bh-sidebar-content {
+  transition: 0.25s ease-in-out;
+  margin-left: 31px;
+}
+
+.bh-sidebar-item svg {
+  font-size: 16px;
+  width: 24px;
+  transform: translateX(-3px);
+}
+
+.bh-fixed-top .bh-main {
+  margin: 64px 0 0 225px;
+  padding: 24px;
+}
+
+.bh-sidebar.show {
+  transform: translateX(-225px);
+}
+
+.bh-main.show {
+  margin-left: 0 !important;
+}
+
+.pi input {
+  display: none;
+}
+
+.pi label {
+  border-radius: 8px;
+  border: 1px solid var(--grey-03);
+
+  width: 100%;
+  height: 200px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

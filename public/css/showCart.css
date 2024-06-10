@@ -1,0 +1,15 @@
+.form-quantity {
+  border-radius: 8px;
+  border: 1px solid var(--grey-03);
+}
+.form-quantity input[name="btn_plus"],
+.form-quantity input[name="btn_sub"] {
+  width: 30px;
+}
+.form-quantity input[name="quantity"] {
+  width: 16px !important;
+  border: none;
+  text-align: center;
+  transform: translate(5px, 2px);
+  background: transparent;
+}

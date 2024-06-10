@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 22, 2023 at 12:57 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 8.1.6
+-- Máy chủ: 127.0.0.1
+-- Thời gian đã tạo: Th6 10, 2024 lúc 02:49 PM
+-- Phiên bản máy phục vụ: 10.4.28-MariaDB
+-- Phiên bản PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,55 +18,79 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `laptop`
+-- Cơ sở dữ liệu: `laptop`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `donhang`
+-- Cấu trúc bảng cho bảng `donhang`
 --
 
 CREATE TABLE `donhang` (
-  `id_dh` int(10) UNSIGNED NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `thoidiemmua` datetime NOT NULL,
-  `tennguoinhan` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dienthoai` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `diachigiaohang` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id_dh` int(11) UNSIGNED NOT NULL,
+  `id_user` int(11) DEFAULT NULL,
+  `thoidiemmua` datetime DEFAULT current_timestamp(),
+  `hoten` varchar(100) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `dienthoai` varchar(100) DEFAULT NULL,
+  `diachi` varchar(100) DEFAULT NULL,
   `trangthai` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `donhang`
+--
+
+INSERT INTO `donhang` (`id_dh`, `id_user`, `thoidiemmua`, `hoten`, `email`, `dienthoai`, `diachi`, `trangthai`) VALUES
+(14, NULL, '2024-06-10 13:06:40', 'Puu Goo', 'user1@gmail.com', '0984004258', '190/3', 0),
+(15, NULL, '2024-06-10 13:07:44', 'Puu Goo', 'puugoo002@gmail.com', '0984004258', '190/3', 0),
+(16, NULL, '2024-06-10 13:09:43', 'Puu Goo', 'user1@gmail.com', '0984004258', '190/3', 0),
+(17, NULL, '2024-06-10 13:11:12', 'Puu Goo', 'user1@gmail.com', '0984004258', '190/3', 0),
+(18, NULL, '2024-06-10 13:11:33', 'Puu Goo', 'user1@gmail.com', '0984004258', '190/3', 0),
+(19, NULL, '2024-06-10 13:13:59', 'Puu Goo', 'user1@gmail.com', '0984004258', '190/3', 0),
+(20, NULL, '2024-06-10 13:15:20', 'Puu Goo', 'user1@gmail.com', '0984004258', '190/3', 0),
+(21, NULL, '2024-06-10 13:22:47', 'Puu Goo', 'user1@gmail.com', '0984004258', '190/3', 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `donhangchitiet`
+-- Cấu trúc bảng cho bảng `donhangchitiet`
 --
 
 CREATE TABLE `donhangchitiet` (
   `id_ct` int(10) UNSIGNED NOT NULL,
   `id_dh` int(11) NOT NULL,
   `id_sp` int(11) NOT NULL,
-  `ten_sp` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ten_sp` varchar(100) NOT NULL,
   `soluong` int(11) NOT NULL DEFAULT 1,
   `gia` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Đang đổ dữ liệu cho bảng `donhangchitiet`
+--
+
+INSERT INTO `donhangchitiet` (`id_ct`, `id_dh`, `id_sp`, `ten_sp`, `soluong`, `gia`) VALUES
+(45, 20, 537, 'Acer E140 AN515 45 R6EV', 1, 16422979),
+(46, 20, 1822, 'Surface Zenbook N4120', 1, 7208691),
+(47, 21, 537, 'Acer E140 AN515 45 R6EV', 1, 16422979);
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `loai`
+-- Cấu trúc bảng cho bảng `loai`
 --
 
 CREATE TABLE `loai` (
   `id_loai` int(10) UNSIGNED NOT NULL,
-  `ten_loai` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ten_loai` varchar(50) NOT NULL,
   `thutu` int(11) NOT NULL DEFAULT 0,
   `anhien` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `loai`
+-- Đang đổ dữ liệu cho bảng `loai`
 --
 
 INSERT INTO `loai` (`id_loai`, `ten_loai`, `thutu`, `anhien`) VALUES
@@ -81,30 +105,30 @@ INSERT INTO `loai` (`id_loai`, `ten_loai`, `thutu`, `anhien`) VALUES
 (9, 'Masstel', 8, 1),
 (10, 'LG', 9, 1),
 (11, 'CHUWI', 10, 1),
-(12, 'itel', 11, 1);
+(12, 'ITEL', 11, 1);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sanpham`
+-- Cấu trúc bảng cho bảng `sanpham`
 --
 
 CREATE TABLE `sanpham` (
   `id_sp` int(10) UNSIGNED NOT NULL,
   `id_loai` int(11) NOT NULL,
-  `ten_sp` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ten_sp` varchar(100) NOT NULL,
   `gia` int(11) NOT NULL,
   `gia_km` int(11) DEFAULT NULL,
-  `hinh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `hinh` varchar(255) DEFAULT NULL,
   `ngay` date NOT NULL,
   `soluotxem` int(11) NOT NULL DEFAULT 0,
   `hot` tinyint(1) NOT NULL DEFAULT 0,
   `anhien` tinyint(1) NOT NULL DEFAULT 0,
-  `mota` text COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `mota` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `sanpham`
+-- Đang đổ dữ liệu cho bảng `sanpham`
 --
 
 INSERT INTO `sanpham` (`id_sp`, `id_loai`, `ten_sp`, `gia`, `gia_km`, `hinh`, `ngay`, `soluotxem`, `hot`, `anhien`, `mota`) VALUES
@@ -5129,21 +5153,21 @@ INSERT INTO `sanpham` (`id_sp`, `id_loai`, `ten_sp`, `gia`, `gia_km`, `hinh`, `n
 -- --------------------------------------------------------
 
 --
--- Table structure for table `sanphamchitiet`
+-- Cấu trúc bảng cho bảng `sanphamchitiet`
 --
 
 CREATE TABLE `sanphamchitiet` (
   `id_ct` int(10) UNSIGNED NOT NULL,
   `id_sp` int(11) NOT NULL,
-  `RAM` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `CPU` varchar(50) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Dia` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Mausac` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `Cannang` varchar(20) COLLATE utf8mb4_unicode_ci DEFAULT NULL
+  `RAM` varchar(20) DEFAULT NULL,
+  `CPU` varchar(50) DEFAULT NULL,
+  `Dia` varchar(20) DEFAULT NULL,
+  `Mausac` varchar(20) DEFAULT NULL,
+  `Cannang` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `sanphamchitiet`
+-- Đang đổ dữ liệu cho bảng `sanphamchitiet`
 --
 
 INSERT INTO `sanphamchitiet` (`id_ct`, `id_sp`, `RAM`, `CPU`, `Dia`, `Mausac`, `Cannang`) VALUES
@@ -10155,111 +10179,109 @@ INSERT INTO `sanphamchitiet` (`id_ct`, `id_sp`, `RAM`, `CPU`, `Dia`, `Mausac`, `
 -- --------------------------------------------------------
 
 --
--- Table structure for table `users`
+-- Cấu trúc bảng cho bảng `users`
 --
 
 CREATE TABLE `users` (
-  `id_user` int(10) UNSIGNED NOT NULL,
-  `ho` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `ten` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `matkhau` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `diachi` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `dienthoai` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hinh` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `id_user` int(10) NOT NULL,
+  `hoten` varchar(100) NOT NULL,
+  `matkhau` varchar(100) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `diachi` varchar(255) NOT NULL,
+  `dienthoai` varchar(255) NOT NULL,
+  `hinh` varchar(255) DEFAULT NULL,
   `vaitro` tinyint(1) NOT NULL DEFAULT 0,
   `trangthai` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `users`
+-- Đang đổ dữ liệu cho bảng `users`
 --
 
-INSERT INTO `users` (`id_user`, `ho`, `ten`, `matkhau`, `email`, `diachi`, `dienthoai`, `hinh`, `vaitro`, `trangthai`) VALUES
-(1, 'Đỗ Đạt', 'Cao', '$2y$10$eM7ZAxBYIcAPjbnhkVxl9egL/.yX5430BbXd11AN5uasmvuvTdMuq', 'dodatcao@gmail.com', '', '0918765238', '', 1, 0),
-(2, 'Mai Anh', 'Tới', '$2y$10$gHAzMELREvjyqAPWpmzTsOB5kCJb/cy96gz1MYVZbA0QZWqr.uyDG', 'maianhtoi@gmail.com', '', '098532482', '', 0, 0),
-(3, 'Đào Kho', 'Báu', '$2y$10$UWr8M5j8kw0AFwAHV7QB6Ou1uoAO.S5bMYRM31KEG1vrl7WyztR6u', 'daokhobau@gmail.com', '', '097397392', '', 1, 1);
+INSERT INTO `users` (`id_user`, `hoten`, `matkhau`, `email`, `diachi`, `dienthoai`, `hinh`, `vaitro`, `trangthai`) VALUES
+(13, 'Puu Goo', '$2y$10$sFwJEfOt8XknNrtirPnmkeb2d1ydRHRoaYxdgzl7FJGezBVKxt0FW', 'puugoo002@gmail.com', '', '', NULL, 0, 0),
+(14, 'user1', '$2y$10$N9ezrDzyPW9EmZjcwGQa4evVbt95WD0Ytd9gifqi3FAj9p2kEnvpK', 'user1@gmail.com', '', '', NULL, 1, 0),
+(15, 'user2', '$2y$10$ukqNSpWmGsh3XVCmZ0ovuOhTxiZtqQDkGpW7FTYseDp00ifd1L2vu', 'user2@gmail.com', '', '', NULL, 0, 0);
 
 --
--- Indexes for dumped tables
+-- Chỉ mục cho các bảng đã đổ
 --
 
 --
--- Indexes for table `donhang`
+-- Chỉ mục cho bảng `donhang`
 --
 ALTER TABLE `donhang`
   ADD PRIMARY KEY (`id_dh`);
 
 --
--- Indexes for table `donhangchitiet`
+-- Chỉ mục cho bảng `donhangchitiet`
 --
 ALTER TABLE `donhangchitiet`
   ADD PRIMARY KEY (`id_ct`);
 
 --
--- Indexes for table `loai`
+-- Chỉ mục cho bảng `loai`
 --
 ALTER TABLE `loai`
   ADD PRIMARY KEY (`id_loai`);
 
 --
--- Indexes for table `sanpham`
+-- Chỉ mục cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
   ADD PRIMARY KEY (`id_sp`);
 
 --
--- Indexes for table `sanphamchitiet`
+-- Chỉ mục cho bảng `sanphamchitiet`
 --
 ALTER TABLE `sanphamchitiet`
   ADD PRIMARY KEY (`id_ct`);
 
 --
--- Indexes for table `users`
+-- Chỉ mục cho bảng `users`
 --
 ALTER TABLE `users`
-  ADD PRIMARY KEY (`id_user`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT cho các bảng đã đổ
 --
 
 --
--- AUTO_INCREMENT for table `donhang`
+-- AUTO_INCREMENT cho bảng `donhang`
 --
 ALTER TABLE `donhang`
-  MODIFY `id_dh` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_dh` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
--- AUTO_INCREMENT for table `donhangchitiet`
+-- AUTO_INCREMENT cho bảng `donhangchitiet`
 --
 ALTER TABLE `donhangchitiet`
-  MODIFY `id_ct` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ct` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
--- AUTO_INCREMENT for table `loai`
+-- AUTO_INCREMENT cho bảng `loai`
 --
 ALTER TABLE `loai`
-  MODIFY `id_loai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id_loai` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
--- AUTO_INCREMENT for table `sanpham`
+-- AUTO_INCREMENT cho bảng `sanpham`
 --
 ALTER TABLE `sanpham`
-  MODIFY `id_sp` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5001;
+  MODIFY `id_sp` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5054;
 
 --
--- AUTO_INCREMENT for table `sanphamchitiet`
+-- AUTO_INCREMENT cho bảng `sanphamchitiet`
 --
 ALTER TABLE `sanphamchitiet`
   MODIFY `id_ct` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5001;
 
 --
--- AUTO_INCREMENT for table `users`
+-- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `id_user` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_user` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

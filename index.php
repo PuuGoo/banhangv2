@@ -4,6 +4,9 @@ require_once "models/config.php";
 include_once "models/functions.php";
 include_once "controllers/page.php";
 include_once "controllers/userController.php";
+include_once "controllers/productController.php";
+include_once "controllers/catelogyController.php";
+
 
 
 $database = new Database;
@@ -23,10 +26,19 @@ $router = [
         'addtocart' => [$page, 'addtocart'],
         'showcart' => [$page, 'showcart'],
         'checkout' => [$page, 'checkout'],
+        'admin' => [$page, 'admin'],
         'signin' => [$userController, 'signin'],
         'signup' => [$userController, 'signup'],
         'changepass' => [$userController, 'changepass'],
         'logout' => [$userController, 'logout'],
+        'admin/product' => [$productController, 'index'],
+        'admin/productadd' => [$productController, 'add'],
+        'admin/productedit' => [$productController, 'edit'],
+        'admin/productdelete' => [$productController, 'delete'],
+        'admin/catelogy' => [$catelogyController, 'index'],
+        'admin/catelogyadd' => [$catelogyController, 'add'],
+        'admin/catelogyedit' => [$catelogyController, 'edit'],
+        'admin/catelogydelete' => [$catelogyController, 'delete'],
     ],
     'post' => [
         'checkout_' => [$page, 'checkout_'],
@@ -34,6 +46,10 @@ $router = [
         'signin_' => [$userController, 'signin_'],
         'changepass_' => [$userController, 'changepass_'],
         'submit' => [$page, 'submit'],
+        'admin/productadd_' => [$productController, 'add_'],
+        'admin/productedit_' => [$productController, 'edit_'],
+        'admin/catelogyadd_' => [$catelogyController, 'add_'],
+        'admin/catelogyedit_' => [$catelogyController, 'edit_'],
 
     ]
 ];

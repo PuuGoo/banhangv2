@@ -8,104 +8,76 @@ $priceTotal = $quantityTotal = 0;
     <div class="container">
         <div class="site-cart sc mt-80">
             <div class="sc-title display-3 text-center mb-40">Your Cart</div>
-            <form action="" method="post" id="formCart">
-                <div class="sc-cartInfo d-flex align-items-center">
-                    <div class="sc-items me-24 border rounded-2 border-grey d-flex flex-column" style="width: 788px; padding: 24px;height: fit-content;">
+            <table class="table table-bordered">
+                <thead>
+                    <?php
+
+                    if (isset($_SESSION['checkbox'])) {
+                        $count = array_count_values($_SESSION['checkbox']);
+                    }
+
+                    ?>
+                    <tr class="align-middle text-center">
+                        <th scope="col">
+                            <div class="form-check">
+                                <input type="checkbox" name="" id="checkbox_all" class="form-check-input" <?= isset($count['true']) && $count['true'] == count($_SESSION['checkbox']) ? "checked" : "" ?>>
+                            </div>
+                        </th>
+                        <th scope="col" class="text-start">Product</th>
+                        <th scope="col">Unit price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Amount of money</th>
+                        <th scope="col">Operation</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    <?php if (isset($_SESSION['cart'])) : ?>
                         <?php foreach ($_SESSION['cart'] as $id_sp => $quantity) : ?>
                             <?php
 
-                            $pro = Product::find_product_by_id($id_sp);
-                            $price = $pro->gia * $quantity;
-                            $priceTotal += $price;
-                            $quantityTotal += $quantity;
-
-                            if (isset($_SESSION['checkbox'][$id_sp])) {
-                                if ($_SESSION['checkbox'][$id_sp] == "true") {
-                                    $state = "checked";
-                                } else {
-                                    $state = "";
-                                }
-                            }
+                            $prod = Product::find_product_by_id($id_sp);
+                            $amount = $prod->gia * $quantity;
 
 
                             ?>
-                            <div class="sc-item sc-i d-flex justify-content-between align-items-center mb-24 border-bottom" style="height: 100%">
-                                <div class="sc-i-infoPro d-flex align-items-center">
-                                    <div class="form-check me-8">
-                                        <input class="form-check-input" <?= isset($state) ? $state : "" ?> type="checkbox" value="" id="<?= $pro->id_sp ?>">
+                            <tr class="align-middle text-center">
+                                <td>
+                                    <div class="form-check">
+                                        <input type="checkbox" name="checkbox" id="" class="form-check-input" <?= isset($_SESSION['checkbox'][$id_sp]) && $_SESSION['checkbox'][$prod->id_sp] == "true" ? "checked" : "" ?>>
+                                        <input type="hidden" name="id_sp" style="display:none" value="<?= $prod->id_sp ?>">
                                     </div>
-                                    <div class="sc-i-img me-16">
-                                        <img src="<?= $pro->hinh ?>" alt="" width="100" height="100">
-                                    </div>
-                                    <div class="sc-i-content sc-ic">
-                                        <div class="sc-ic-name display-6"><?= $pro->ten_sp ?></div>
-                                        <div class="sc-ic-price display-6" style="color: var(--darkGreen-03)"><?= number_format($price, 0, "", "."); ?></div>
-                                    </div>
-                                </div>
-                                <div class="sc-i-buttons d-flex align-items-center">
-                                    <div class="sc-ib-formIncreDecre me-8">
-                                        <div class="d-flex align-items-center justify-content-between border rounded-2" style="width: fit-content; padding: 12px;">
-                                            <input class="border-0 bg-white button-sub" type="button" value="-" data-field="quantity">
-                                            <input class="border-0 text-center" style="width: 50px;" type="number" id="<?= $id_sp ?>" step="1" max="10" value="<?= $quantity ?>" name="quantity">
-                                            <input class="border-0 bg-white button-plus" type="button" value="+" data-field="quantity">
-                                        </div>
-                                    </div>
-                                    <a class="sc-ib-delete" href="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" height="24" width="24" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.-->
-                                            <path d="M135.2 17.7C140.6 6.8 151.7 0 163.8 0H284.2c12.1 0 23.2 6.8 28.6 17.7L320 32h96c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 96 0 81.7 0 64S14.3 32 32 32h96l7.2-14.3zM32 128H416V448c0 35.3-28.7 64-64 64H96c-35.3 0-64-28.7-64-64V128zm96 64c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16zm96 0c-8.8 0-16 7.2-16 16V432c0 8.8 7.2 16 16 16s16-7.2 16-16V208c0-8.8-7.2-16-16-16z"></path>
-                                        </svg>
-                                    </a>
-                                </div>
-                            </div>
+                                </td>
+                                <td class="text-start">
+                                    <img src="<?= $prod->hinh ?>" alt="" width="120" height="100">
+                                    <?= $prod->ten_sp ?>
+                                </td>
+                                <td><?= number_format($prod->gia, 0, "", ".") . " VND" ?></td>
+                                <td>
+                                    <form action="" class="form-quantity input-group d-flex">
+                                        <input class="btn" type="button" name="btn_sub" id="" value="-" data-field="quantity">
+                                        <input type="number" name="quantity" class="form-control" value="<?= $quantity ?>">
+                                        <input class="btn" type="button" name="btn_plus" id="" value="+" data-field="quantity">
+                                        <input type="hidden" name="id_sp" style="display:none" value="<?= $prod->id_sp ?>">
+                                    </form>
+                                </td>
+                                <td class="amount"><?= number_format($amount, 0, "", ".") . " VND" ?></td>
+                                <td>
+                                    <input type="hidden" name="id_sp" style="display:none" value="<?= $prod->id_sp ?>">
+                                    <button type="button" name="btn_delete" style="background: transparent;" class="border-0">
+                                        <a href="#"><i class="fa-solid fa-trash"></i></a>
+                                    </button>
+                                </td>
+                            </tr>
                         <?php endforeach; ?>
-                    </div>
-                    <div class="sc-proSum scp border rounded-2 border-grey d-flex flex-column justify-content-center" style="width: 450px;padding: 24px;height:200px;">
-                        <div class="scp-proList mb-8">
-                            <div class="scp-p-productEmpty">No products selected</div>
-                            <div class="scp-p-items d-flex justify-content-between align-items-center">
-                                <div class="scp-pi-name text-break overflow-x-hidden" style="width: 200px;white-space: nowrap;">Product Name</div>
-                                <div class="scp-pi-price" style="white-space: nowrap;">Product Price</div>
-                            </div>
-                        </div>
-                        <div class="scp-priceTotal d-flex justify-content-between align-items-center mb-8">
-                            <div class="scp-pt-title h2">Total Price</div>
-                            <div class="scp-pt-price"><?= number_format($priceTotal, 0, "", ".") . " VND" ?></div>
-                        </div>
-                        <div class="sc-button text-end">
-                            <div class="scp-p-checkboxEmpty" style="color: red; font-weight: bold;">Please Select Least One Product To Checkout!</div>
-                            <a href="checkout" class="d-flex justify-content-end">
-                                <button type="button" name="btnCheckout" class="btn btn-primary">Checkout</button>
-                            </a>
-                        </div>
-                    </div>
+                    <?php endif; ?>
+                </tbody>
+            </table>
 
-                </div>
-            </form>
-            <?php
-
-            if (isset($_SESSION['checkbox'])) {
-                $str = [];
-                foreach ($_SESSION['checkbox'] as $id_sp => $state) {
-                    $str_item = "{$id_sp}={$state}";
-                    array_push($str, $str_item);
-                };
-                $newStr = implode("&", $str);
-            }
-
-            if (isset($_SESSION['cart'])) {
-                $strCar = [];
-                foreach ($_SESSION['cart'] as $id_sp => $quantity) {
-                    $str_car = "{$id_sp}={$quantity}";
-                    array_push($strCar, $str_car);
-                }
-                $newStrCar = implode("&", $strCar);
-            }
-
-
-
-            ?>
-            <input type="hidden" name="checkboxValue" value="<?= $newStr ?>" value_session_cart="<?= $newStrCar ?>">
-
+            <div class="mes display-5" style="color: var(--red-01); display: <?= isset($count['false']) && $count['false'] == count($_SESSION['checkbox']) ? "block" : "none" ?>">Please select a product to process checkout!</div>
+            <button type="submit" class="btn btn-primary" name="btn_checkout" style="display: <?= isset($count['true']) ? "block" : "none" ?>">
+                <a class="text-white" href="<?= ROOT_URL . "checkout" ?>">Checkout</a>
+            </button>
         </div>
     </div>
 </div>
