@@ -4,6 +4,7 @@ class ProductController
 {
     public function index()
     {
+        $this->checkLoginAdmin();
         global $params;
         $pageSize = 12;
         $pageNum = isset($params['page']) ? $params['page'] : 1;
@@ -16,6 +17,7 @@ class ProductController
 
     public function add()
     {
+        $this->checkLoginAdmin();
 
         $pageTitle = "Product Add";
         $contentView = "views/admin/productadd.php";
@@ -42,6 +44,7 @@ class ProductController
 
     public function edit()
     {
+        $this->checkLoginAdmin();
         global $params;
         $id_sp = $params['id_sp'];
         $pageTitle = "Product Edit";
@@ -78,6 +81,17 @@ class ProductController
         $id_sp = $params['id_sp'];
         Product::product_delete($id_sp);
         redirect("admin/product");
+    }
+
+    private function checkLoginAdmin()
+    {
+        if (isset($_SESSION['vaitro']) && $_SESSION['vaitro'] == 1) {
+            if (isset($_SESSION['back'])) {
+                header("location" . $_SESSION['back']);
+            }
+        } else {
+            redirect("");
+        }
     }
 }
 

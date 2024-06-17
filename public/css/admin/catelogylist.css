@@ -1,0 +1,15 @@
+.verify {
+  border-radius: 8px;
+  z-index: 1040;
+  border: 1px solid var(--grey-03);
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  padding: 24px;
+  background: var(--grey-03);
+}

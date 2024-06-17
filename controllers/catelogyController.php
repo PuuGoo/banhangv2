@@ -4,6 +4,7 @@ class CatelogyController
 {
     public function index()
     {
+        $this->checkLoginAdmin();
         global $params;
         $pageSize = 12;
         $pageNum = isset($params['page']) ? $params['page'] : 1;
@@ -16,6 +17,7 @@ class CatelogyController
 
     public function add()
     {
+        $this->checkLoginAdmin();
 
         $pageTitle = "Catelogy Add";
         $contentView = "views/admin/catelogyadd.php";
@@ -24,15 +26,25 @@ class CatelogyController
 
     public function add_()
     {
-        $ten_loai = trim(strip_tags($_POST['ten_loai']));
-        $thutu = (int) $_POST['thutu'];
-        $anhien = (int) $_POST['anhien'];
-        $id_loai = Catelogy::catelogy_add($ten_loai, $thutu, $anhien);
-        redirect("admin/catelogy");
+        $validator = new Validator($_POST);
+        $errors = $validator->validateFormCatAdd();
+
+        if (empty($errors)) {
+            $ten_loai = trim(strip_tags($_POST['ten_loai']));
+            $thutu = (int) $_POST['thutu'];
+            $anhien = (int) $_POST['anhien'];
+            $id_loai = Catelogy::catelogy_add($ten_loai, $thutu, $anhien);
+            redirect("admin/catelogy");
+        } else {
+            $pageTitle = "Catelogy Add";
+            $contentView = "views/admin/catelogyadd.php";
+            include "views/admin/layout.php";
+        }
     }
 
     public function edit()
     {
+        $this->checkLoginAdmin();
         global $params;
         $id_loai = $params['id_loai'];
         $pageTitle = "Catelogy Edit";
@@ -56,6 +68,13 @@ class CatelogyController
         $id_loai = $params['id_loai'];
         Catelogy::catelogy_delete($id_loai);
         redirect("admin/catelogy");
+    }
+
+    private function checkLoginAdmin()
+    {
+        if (isset($_SESSION['vaitro']) && $_SESSION['vaitro'] !== 1) {
+            redirect("");
+        }
     }
 }
 

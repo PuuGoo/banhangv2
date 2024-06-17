@@ -40,6 +40,7 @@ class UserController
             $_SESSION['id_user'] = $result['id_user'];
             $_SESSION['hoten'] = $result['hoten'];
             $_SESSION['email'] = $result['email'];
+            $_SESSION['vaitro'] = $result['vaitro'];
             $pageTitle = "Save Successfully";
             $view = "mesSignIn.php";
             include "views/layout.php";
@@ -87,7 +88,7 @@ class UserController
 
     public static function logout()
     {
-        session_destroy();
+        unset($_SESSION['id_user'], $_SESSION['email'], $_SESSION['hoten'], $_SESSION['vaitro'], $_SESSION['back']);
         redirect("signin");
     }
 }

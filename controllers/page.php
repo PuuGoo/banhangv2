@@ -99,12 +99,5 @@ class Page
             include "views/layout.php";
         }
     }
-
-    public function admin()
-    {
-        $pageTitle = "Dashboard";
-        $contentView = "views/admin/dashboard.php";
-        include "views/admin/layout.php";
-    }
 }
 $page = new Page;

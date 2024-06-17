@@ -6,6 +6,7 @@ include_once "controllers/page.php";
 include_once "controllers/userController.php";
 include_once "controllers/productController.php";
 include_once "controllers/catelogyController.php";
+include_once "controllers/adminController.php";
 
 
 
@@ -26,7 +27,6 @@ $router = [
         'addtocart' => [$page, 'addtocart'],
         'showcart' => [$page, 'showcart'],
         'checkout' => [$page, 'checkout'],
-        'admin' => [$page, 'admin'],
         'signin' => [$userController, 'signin'],
         'signup' => [$userController, 'signup'],
         'changepass' => [$userController, 'changepass'],
@@ -39,6 +39,9 @@ $router = [
         'admin/catelogyadd' => [$catelogyController, 'add'],
         'admin/catelogyedit' => [$catelogyController, 'edit'],
         'admin/catelogydelete' => [$catelogyController, 'delete'],
+        'admin' => [$adminController, 'index'],
+        'admin/login' => [$adminController, 'login'],
+        'admin/logout' => [$adminController, 'logout'],
     ],
     'post' => [
         'checkout_' => [$page, 'checkout_'],
@@ -50,6 +53,7 @@ $router = [
         'admin/productedit_' => [$productController, 'edit_'],
         'admin/catelogyadd_' => [$catelogyController, 'add_'],
         'admin/catelogyedit_' => [$catelogyController, 'edit_'],
+        'admin/login_' => [$adminController, 'login_'],
 
     ]
 ];

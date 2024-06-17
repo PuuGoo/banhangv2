@@ -42,4 +42,12 @@ $(document).ready(function () {
   }
 
   navbarToggle(btnNavToggle);
+
+  // var btn_delete_cat = $("#delete_cat");
+  // btn_delete_cat.on("click", function (e) {
+  //   $(e)
+  //     .closest("tbody")
+  //     .find(".veryfi")
+  //     .attr("style", "display: block !important");
+  // });
 });
